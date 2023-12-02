@@ -8,7 +8,7 @@ const WeatherBox = () => {
   const [sign, setSign] = useState("F");
 
   const api = {
-    key: "c37881d80ee2eb0518418590500f0104",
+    key: process.env.REACT_APP_API_KEY,
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
@@ -50,7 +50,10 @@ const WeatherBox = () => {
       {sign === "F" && <h2>Wind: {wind} mph</h2>}
       <form>
         <label>Name</label>
-        <textarea onChange={(e) => setName(e.target.value)}>{name}</textarea>
+        <textarea
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        ></textarea>
         <button onClick={handleSubmit}>Search...</button>
       </form>
       {temp !== "Temp" && (

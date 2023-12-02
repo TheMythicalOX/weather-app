@@ -3,7 +3,8 @@ import { useState } from "react";
 const WeatherBox = () => {
   const [temp, setTemp] = useState("Temp");
   const [wind, setWind] = useState("Wind");
-  const [units, setUnits] = useState("imperial");
+  const [baseTemp, setBaseTemp] = useState(0);
+  const [baseWind, setBaseWind] = useState(0);
   const [name, setName] = useState("");
   const [sign, setSign] = useState("F");
 
@@ -12,42 +13,51 @@ const WeatherBox = () => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
-  const getWeatherData = (unit) => {
-    fetch(`${api.base}weather?q=${name}&units=${unit}&APPID=${api.key}`)
+  const getWeatherData = () => {
+    fetch(`${api.base}weather?q=${name}&units=imperial&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
         // console.log(result);
-        setTemp(result.main.temp);
-        setWind(result.wind.speed);
+        setWind(Math.round(result.wind.speed));
+        setTemp(Math.round(result.main.temp));
+        setBaseTemp(result.main.temp);
+        setBaseWind(result.wind.speed);
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getWeatherData(units);
-    handleSign(units);
+    getWeatherData();
   };
 
   const handleUnits = (e) => {
     // console.log(e.target.value);
-    getWeatherData(e.target.value);
-    setUnits(e.target.value);
-    handleSign(e.target.value);
-  };
-
-  const handleSign = (sign) => {
-    if (sign === "imperial") setSign("F");
-    if (sign === "metric") setSign("C");
-    if (sign === "kelvin") setSign("K");
+    if (e.target.value === "imperial") {
+      setSign("F");
+      setTemp(Math.round(baseTemp));
+      setWind(Math.round(baseWind));
+    }
+    if (e.target.value === "metric") {
+      setSign("C");
+      setTemp(Math.round(((baseTemp - 32) * 5) / 9));
+      setWind(Math.round(baseWind * 1.609));
+    }
+    if (e.target.value === "kelvin") {
+      setSign("K");
+      setTemp(Math.round(((baseTemp - 32) * 5) / 9 + 273.15));
+      setWind(Math.round(baseWind * 1.609));
+    }
   };
 
   return (
     <div className="weather-box">
-      <h1>
-        Temp: {temp}°{sign}
-      </h1>
-      {sign !== "F" && <h2>Wind: {wind} Km/h</h2>}
-      {sign === "F" && <h2>Wind: {wind} mph</h2>}
+      {temp !== "Temp" && (
+        <h1>
+          Temp: {temp}°{sign}
+        </h1>
+      )}
+      {temp !== "Temp" && sign !== "F" && <h2>Wind: {wind} Km/h</h2>}
+      {temp !== "Temp" && sign === "F" && <h2>Wind: {wind} mph</h2>}
       <form>
         <label>Name</label>
         <textarea
@@ -56,7 +66,7 @@ const WeatherBox = () => {
         ></textarea>
         <button onClick={handleSubmit}>Search...</button>
       </form>
-      {temp !== "Temp" && (
+      {baseTemp !== 0 && (
         <select onChange={handleUnits}>
           <option value="imperial">imperial</option>
           <option value="metric">metric</option>

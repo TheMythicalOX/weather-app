@@ -7,7 +7,7 @@ const WeatherBox = () => {
   const [name, setName] = useState("");
   const [sign, setSign] = useState("F");
 
-  const apiKey = JSON.stringify(process.env.REACT_APP_API_KEY);
+  const apiKey = "";
 
   const api = {
     key: apiKey,

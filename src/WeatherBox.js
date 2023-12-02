@@ -7,10 +7,8 @@ const WeatherBox = () => {
   const [name, setName] = useState("");
   const [sign, setSign] = useState("F");
 
-  const apiKey = "";
-
   const api = {
-    key: apiKey,
+    key: "c37881d80ee2eb0518418590500f0104",
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
@@ -18,7 +16,7 @@ const WeatherBox = () => {
     fetch(`${api.base}weather?q=${name}&units=${unit}&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setTemp(result.main.temp);
         setWind(result.wind.speed);
       });

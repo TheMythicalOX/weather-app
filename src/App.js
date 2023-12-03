@@ -14,8 +14,8 @@ function App() {
         <button className="compare" onClick={handleCompare}>
           Compare...
         </button>
-        {isComp && <WeatherBox />}
         <WeatherBox />
+        {isComp && <WeatherBox />}
       </div>
     </div>
   );

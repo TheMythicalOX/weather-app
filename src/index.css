@@ -1,3 +1,9 @@
+:root {
+  --Var1: rgb(0, 110, 255);
+  --Var2: rgb(255, 153, 0);
+  --Var3: rgb(200, 200, 200);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -47,6 +53,7 @@ html {
 
 /* Search box input */
 .weather-box input {
+  box-shadow: 0px 1px 1px rgb(200, 200, 200);
   color: #ccc;
   background: rgb(17, 17, 17);
   background: linear-gradient(
@@ -61,10 +68,22 @@ html {
   border: none;
 }
 .weather-box input:focus {
-  outline-color: rgb(0, 140, 255);
-  outline-width: 1px;
+  outline-color: var(--Var2);
+  outline-width: 2px;
   outline-style: solid;
-  box-shadow: 0px 3px 2px rgb(0, 140, 255);
+  box-shadow: 0px 3px 2px var(--Var2);
+}
+.weather-box input:hover {
+  outline-color: var(--Var2);
+  box-shadow: 0px 3px 2px var(--Var2);
+}
+.weather-box:nth-child(2) input:focus {
+  outline-color: var(--Var1);
+  box-shadow: 0px 3px 2px var(--Var1);
+}
+.weather-box:nth-child(2) input:hover {
+  outline-color: var(--Var1);
+  box-shadow: 0px 3px 2px var(--Var1);
 }
 
 /* Search button */
@@ -79,11 +98,15 @@ html {
   font-size: 20px;
   border: 1px solid #111;
   border-radius: 40px;
+  box-shadow: 0px 1px 1px rgb(200, 200, 200);
   padding: 10px;
 }
 
 .weather-box button:hover {
-  box-shadow: 0px 3px 2px rgb(0, 140, 255);
+  box-shadow: 0px 3px 2px var(--Var2);
+}
+.weather-box:nth-child(2) button:hover {
+  box-shadow: 0px 3px 2px var(--Var1);
 }
 .weather-box button:active {
   background: rgb(34, 34, 34);
@@ -93,11 +116,21 @@ html {
     rgba(17, 17, 17, 1) 90%
   );
   color: #aaa;
-  box-shadow: 0px 3px 2px rgb(0, 108, 196);
+  box-shadow: 0px 3px 2px var(--Var2);
+  outline-color: var(--Var2);
+  outline-width: 2px;
+  outline-style: solid;
+}
+.weather-box:nth-child(2) button:active {
+  box-shadow: 0px 3px 2px var(--Var1);
+  outline-color: var(--Var1);
+  outline-width: 2px;
+  outline-style: solid;
 }
 
 /* compare button */
 .compare {
+  margin-bottom: 10px;
   background: rgb(17, 17, 17);
   background: linear-gradient(
     0deg,
@@ -109,10 +142,11 @@ html {
   border: 1px solid #111;
   border-radius: 40px;
   padding: 10px;
+  box-shadow: 0px 1px 1px var(--Var3);
 }
 
 .compare:hover {
-  box-shadow: 0px -3px 2px rgb(0, 140, 255);
+  box-shadow: 0px 3px 2px var(--Var3);
 }
 .compare:active {
   background: rgb(34, 34, 34);
@@ -122,5 +156,8 @@ html {
     rgba(17, 17, 17, 1) 90%
   );
   color: #aaa;
-  box-shadow: 0px -3px 2px rgb(0, 108, 196);
+  box-shadow: 0px 3px 2px var(--Var3);
+  outline-color: var(--Var3);
+  outline-width: 2px;
+  outline-style: solid;
 }

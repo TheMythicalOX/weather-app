@@ -21,6 +21,7 @@ html {
   margin: 40px auto;
   padding: 20px;
   align-items: center;
+  text-align: center;
 }
 
 .weather-box {
@@ -93,4 +94,33 @@ html {
   );
   color: #aaa;
   box-shadow: 0px 3px 2px rgb(0, 108, 196);
+}
+
+/* compare button */
+.compare {
+  background: rgb(17, 17, 17);
+  background: linear-gradient(
+    0deg,
+    rgba(17, 17, 17, 1) 38%,
+    rgba(34, 34, 34, 1) 80%
+  );
+  color: #ccc;
+  font-size: 20px;
+  border: 1px solid #111;
+  border-radius: 40px;
+  padding: 10px;
+}
+
+.compare:hover {
+  box-shadow: 0px -3px 2px rgb(0, 140, 255);
+}
+.compare:active {
+  background: rgb(34, 34, 34);
+  background: linear-gradient(
+    0deg,
+    rgba(34, 34, 34, 1) 52%,
+    rgba(17, 17, 17, 1) 90%
+  );
+  color: #aaa;
+  box-shadow: 0px -3px 2px rgb(0, 108, 196);
 }

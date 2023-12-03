@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const WeatherBox = () => {
+const WeatherBox = (props) => {
   const [temp, setTemp] = useState("Temp");
   const [wind, setWind] = useState("Wind");
   const base = { temp: "", wind: "" };

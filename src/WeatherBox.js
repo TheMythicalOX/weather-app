@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const WeatherBox = (props) => {
   const [temp, setTemp] = useState("Temp");
@@ -12,25 +12,26 @@ const WeatherBox = (props) => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
-  const changeInfo = (i) => {
-    setSign(i);
-    // console.log(i, temp, wind);
-    if (i === "F") {
-      setTemp(Math.round(data.temp));
-      setWind(Math.round(data.wind));
-    }
-    if (i === "C") {
-      setTemp(Math.round(((data.temp - 32) * 5) / 9));
-      setWind(Math.round(data.wind * 1.609));
-    }
-    if (i === "K") {
-      setTemp(Math.round(((data.temp - 32) * 5) / 9 + 273.15));
-      setWind(Math.round(data.wind * 1.609));
-    }
-  };
+  const changeInfo = useCallback(
+    (i) => {
+      setSign(i);
+      if (i === "F") {
+        setTemp(Math.round(data.temp));
+        setWind(Math.round(data.wind));
+      }
+      if (i === "C") {
+        setTemp(Math.round(((data.temp - 32) * 5) / 9));
+        setWind(Math.round(data.wind * 1.609));
+      }
+      if (i === "K") {
+        setTemp(Math.round(((data.temp - 32) * 5) / 9 + 273.15));
+        setWind(Math.round(data.wind * 1.609));
+      }
+    },
+    [data.temp, data.wind]
+  );
 
   const handleUnits = (e) => {
-    // console.log(e.target.value);
     changeInfo(e.target.value);
   };
 
@@ -49,10 +50,9 @@ const WeatherBox = (props) => {
 
   useEffect(() => {
     if (data.temp) {
-      console.log(data, "data");
       changeInfo(sign);
     }
-  }, [data]);
+  }, [data, changeInfo, sign]);
 
   return (
     <div className="weather-box">

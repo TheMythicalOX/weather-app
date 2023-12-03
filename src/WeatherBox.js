@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const WeatherBox = (props) => {
   const [temp, setTemp] = useState("Temp");
   const [wind, setWind] = useState("Wind");
-  const base = { temp: "", wind: "" };
   const [search, setSearch] = useState("");
   const [sign, setSign] = useState("F");
+  const [data, setData] = useState({});
 
   const api = {
     key: process.env.REACT_APP_API_KEY,
@@ -16,16 +16,16 @@ const WeatherBox = (props) => {
     setSign(i);
     // console.log(i, temp, wind);
     if (i === "F") {
-      setTemp(Math.round(base.temp));
-      setWind(Math.round(base.wind));
+      setTemp(Math.round(data.temp));
+      setWind(Math.round(data.wind));
     }
     if (i === "C") {
-      setTemp(Math.round(((base.temp - 32) * 5) / 9));
-      setWind(Math.round(base.wind * 1.609));
+      setTemp(Math.round(((data.temp - 32) * 5) / 9));
+      setWind(Math.round(data.wind * 1.609));
     }
     if (i === "K") {
-      setTemp(Math.round(((base.temp - 32) * 5) / 9 + 273.15));
-      setWind(Math.round(base.wind * 1.609));
+      setTemp(Math.round(((data.temp - 32) * 5) / 9 + 273.15));
+      setWind(Math.round(data.wind * 1.609));
     }
   };
 
@@ -38,10 +38,7 @@ const WeatherBox = (props) => {
     fetch(`${api.base}weather?q=${search}&units=imperial&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
-        setTemp(result.main.temp);
-        setWind(result.wind.speed);
-        console.log(temp, wind);
-        changeInfo(sign);
+        setData({ wind: result.wind.speed, temp: result.main.temp });
       });
   };
 
@@ -49,6 +46,13 @@ const WeatherBox = (props) => {
     e.preventDefault();
     getWeatherData();
   };
+
+  useEffect(() => {
+    if (data.temp) {
+      console.log(data, "data");
+      changeInfo(sign);
+    }
+  }, [data]);
 
   return (
     <div className="weather-box">

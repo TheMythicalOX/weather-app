@@ -61,11 +61,12 @@ const WeatherBox = () => {
       {temp !== "Temp" && sign !== "F" && <h2>Wind: {wind} Km/h</h2>}
       {temp !== "Temp" && sign === "F" && <h2>Wind: {wind} mph</h2>}
       <form>
-        <textarea
+        <input
+          type="text"
           placeholder="Enter Location..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-        ></textarea>
+        />
         <button onClick={handleSubmit}>Search...</button>
       </form>
       {temp !== "Temp" && (

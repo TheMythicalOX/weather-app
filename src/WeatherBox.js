@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 
 const WeatherBox = (props) => {
   // Set useStates
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
   const [temp, setTemp] = useState("Temp");
   const [wind, setWind] = useState("Wind");
   const [search, setSearch] = useState("");
@@ -41,11 +43,32 @@ const WeatherBox = (props) => {
 
   // Get weather data and save the data
   const getWeatherData = () => {
-    fetch(`${api.base}weather?q=${search}&units=imperial&APPID=${api.key}`)
-      .then((res) => res.json())
-      .then((result) => {
-        setData({ wind: result.wind.speed, temp: result.main.temp });
-      });
+    setIsPending(true);
+    const abortCont = new AbortController();
+
+    setTimeout(() => {
+      fetch(`${api.base}weather?q=${search}&units=imperial&APPID=${api.key}`, {
+        signal: abortCont.signal,
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("Please Enter Valid Location");
+          }
+          return res.json();
+        })
+        .then((result) => {
+          setData({ wind: result.wind.speed, temp: result.main.temp });
+          setIsPending(false);
+          setError(null);
+        })
+        .catch((err) => {
+          if (err.name === "AbortError") {
+            console.log("fetch aborted");
+          }
+          setIsPending(false);
+          setError(err.message);
+        });
+    }, 1000);
   };
 
   // Prevent button default and get the weather data
@@ -85,6 +108,8 @@ const WeatherBox = (props) => {
         />
         <button onClick={handleSubmit}>Search...</button>
       </form>
+      {error && <h1>{error}</h1>}
+      {isPending && <p>Loading...</p>}
 
       {/* Units selector, only visible when temp is set */}
       {temp !== "Temp" && (

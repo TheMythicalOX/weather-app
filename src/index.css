@@ -22,6 +22,7 @@ html {
   background-color: #222;
 }
 
+/* Base */
 .content {
   max-width: 600px;
   margin: 40px auto;
@@ -30,13 +31,13 @@ html {
   text-align: center;
 }
 
+/* weather box */
 .weather-box {
   background-color: rgba(60, 99, 134, 0.534);
   width: auto;
   height: 50vh;
   text-align: center;
 }
-
 .weather-box h1,
 .weather-box h2,
 .weather-box textarea,
@@ -45,7 +46,6 @@ html {
   display: block;
   margin: 20px auto;
 }
-
 .padder {
   height: 100px;
   width: auto;
@@ -101,7 +101,6 @@ html {
   box-shadow: 0px 1px 1px rgb(200, 200, 200);
   padding: 10px;
 }
-
 .weather-box button:hover {
   box-shadow: 0px 3px 2px var(--Var2);
 }
@@ -144,7 +143,6 @@ html {
   padding: 10px;
   box-shadow: 0px 1px 1px var(--Var3);
 }
-
 .compare:hover {
   box-shadow: 0px 3px 2px var(--Var3);
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import WeatherBox from "./WeatherBox";
 
 function App() {
+  // compare button handler
   const [isComp, setIsComp] = useState(false);
   const handleCompare = () => {
     if (isComp) setIsComp(false);
@@ -11,9 +12,12 @@ function App() {
   return (
     <div className="App">
       <div className="content">
+        {/* On/off button for compare */}
         <button className="compare" onClick={handleCompare}>
           Compare...
         </button>
+
+        {/* Display 1 weatherBox unless compare is true then display 2 */}
         <WeatherBox />
         {isComp && <WeatherBox />}
       </div>

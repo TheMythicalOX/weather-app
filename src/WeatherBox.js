@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 
 const WeatherBox = (props) => {
-  // Set useStates
+  // Set useStates / variables
+  const [searchLength, setSearchLength] = useState(0);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [temp, setTemp] = useState("Temp");
@@ -9,6 +10,8 @@ const WeatherBox = (props) => {
   const [search, setSearch] = useState("");
   const [sign, setSign] = useState("F");
   const [data, setData] = useState({});
+  const dropDownLimit = 5;
+  const locationData = require("./data/locations.json");
 
   // Set api key and base link
   const api = {
@@ -41,7 +44,7 @@ const WeatherBox = (props) => {
     changeInfo(e.target.value);
   };
 
-  // Get weather data and save the data
+  // Get weather data and save the data, or throw error if invalid
   const getWeatherData = () => {
     setIsPending(true);
     const abortCont = new AbortController();
@@ -68,7 +71,7 @@ const WeatherBox = (props) => {
           setIsPending(false);
           setError(err.message);
         });
-    }, 1000);
+    });
   };
 
   // Prevent button default and get the weather data
@@ -100,13 +103,45 @@ const WeatherBox = (props) => {
 
       {/* Gets search location */}
       <form>
+        <button onClick={handleSubmit}>Search...</button>
         <input
           type="text"
           placeholder="Enter Location..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setSearchLength(e.target.value.length);
+          }}
         />
-        <button onClick={handleSubmit}>Search...</button>
+        {/* drop down menu for search */}
+        {searchLength > 2 && search && (
+          <div className="dropdown">
+            {locationData
+              .filter((item) => {
+                const searchTerm = search.toLowerCase();
+                const searchInput = item.name.toLowerCase();
+
+                return (
+                  searchTerm &&
+                  searchInput.startsWith(searchTerm) &&
+                  searchTerm !== searchInput
+                );
+              })
+              .slice(0, dropDownLimit)
+              .map((item) => (
+                <div
+                  className="dropdown-row"
+                  onClick={() => {
+                    setSearch(item.name);
+                    setSearchLength(item.name.length);
+                  }}
+                  key={item.name}
+                >
+                  {item.name}
+                </div>
+              ))}
+          </div>
+        )}
       </form>
       {error && <h1>{error}</h1>}
       {isPending && <p>Loading...</p>}

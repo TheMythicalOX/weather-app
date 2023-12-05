@@ -14,7 +14,7 @@ const WeatherBox = (props) => {
   const [sign, setSign] = useState("F");
   const [data, setData] = useState({});
   const dropDownLimit = 5;
-  const locationData = require("./data/locations.json");
+  const locationData = require("./data/Us.json");
 
   // Set api key and base link
   const api = {

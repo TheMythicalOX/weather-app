@@ -6,6 +6,9 @@ const WeatherBox = (props) => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [temp, setTemp] = useState("Temp");
+  const [tempMin, setTempMin] = useState("");
+  const [tempMax, setTempMax] = useState("");
+  const [feelsLike, setFeelsLike] = useState("");
   const [wind, setWind] = useState("Wind");
   const [search, setSearch] = useState("");
   const [sign, setSign] = useState("F");
@@ -20,28 +23,37 @@ const WeatherBox = (props) => {
   };
 
   // Set information that is changed by setting units
-  const changeInfo = useCallback(
+  const changeIconInfo = useCallback(
     (i) => {
       setSign(i);
       if (i === "F") {
         setTemp(Math.round(data.temp));
         setWind(Math.round(data.wind));
+        setTempMin(Math.round(data.tempMin));
+        setTempMax(Math.round(data.tempMax));
+        setFeelsLike(Math.round(data.feelsLike));
       }
       if (i === "C") {
         setTemp(Math.round(((data.temp - 32) * 5) / 9));
         setWind(Math.round(data.wind * 1.609));
+        setTempMin(Math.round(((data.tempMin - 32) * 5) / 9));
+        setTempMax(Math.round(((data.tempMax - 32) * 5) / 9));
+        setFeelsLike(Math.round(((data.feelsLike - 32) * 5) / 9));
       }
       if (i === "K") {
         setTemp(Math.round(((data.temp - 32) * 5) / 9 + 273.15));
         setWind(Math.round(data.wind * 1.609));
+        setTempMin(Math.round(((data.tempMin - 32) * 5) / 9 + 273.15));
+        setTempMax(Math.round(((data.tempMax - 32) * 5) / 9 + 273.15));
+        setFeelsLike(Math.round(((data.feelsLike - 32) * 5) / 9 + 273.15));
       }
     },
-    [data.temp, data.wind]
+    [data.temp, data.wind, data.tempMin, data.tempMax, data.feelsLike]
   );
 
   // get and change units used for displaying information
   const handleUnits = (e) => {
-    changeInfo(e.target.value);
+    changeIconInfo(e.target.value);
   };
 
   // Get weather data and save the data, or throw error if invalid
@@ -60,7 +72,19 @@ const WeatherBox = (props) => {
           return res.json();
         })
         .then((result) => {
-          setData({ wind: result.wind.speed, temp: result.main.temp });
+          setData({
+            clouds: result.clouds.all,
+            wind: result.wind.speed,
+            windDeg: result.wind.deg,
+            temp: result.main.temp,
+            tempMin: result.main.temp_min,
+            tempMax: result.main.temp_max,
+            pressure: result.main.pressure,
+            humidity: result.main.humidity,
+            feelsLike: result.main.feels_like,
+            icon: result.weather[0].icon,
+            desc: result.weather[0].main,
+          });
           setIsPending(false);
           setError(null);
         })
@@ -83,9 +107,10 @@ const WeatherBox = (props) => {
   // page refresh
   useEffect(() => {
     if (data.temp) {
-      changeInfo(sign);
+      changeIconInfo(sign);
+      setData(data);
     }
-  }, [data, changeInfo, sign]);
+  }, [data, changeIconInfo, sign]);
 
   // Components html
   return (

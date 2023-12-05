@@ -1,0 +1,12 @@
+/* Dropdown */
+.dropdown {
+  visibility: hidden;
+}
+.weather-box:focus-within .dropdown,
+.dropdown:hover {
+  visibility: visible;
+}
+.weather-box:nth-child(2):focus-within .dropdown,
+.dropdown:hover {
+  visibility: visible;
+}

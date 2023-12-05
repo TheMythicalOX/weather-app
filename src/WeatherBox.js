@@ -119,23 +119,23 @@ const WeatherBox = (props) => {
       {/* Display information */}
       {temp !== "Temp" && (
         <div className="display-info">
-          <h1>
+          <h1 className="temp">
             {temp}°{sign}
           </h1>
-          <h1>
+          <h1 className="high-low">
             {tempMax}°/{tempMin}°
           </h1>
-          <h1>
+          <h1 className="feels-like">
             Feels Like: {feelsLike}°{sign}
           </h1>
-          <h1>Icon: {data.icon}</h1>
-          <h2>Pressure: {data.pressure}</h2>
-          <h2>Humidity: {data.humidity}</h2>
-          <h2>Desc: {data.desc}</h2>
-          <h2>clouds: {data.clouds}</h2>
-          {sign !== "F" && <h2>Wind: {wind} Km/h</h2>}
-          {sign === "F" && <h2>Wind: {wind} mph</h2>}
-          <h2>Wind Direction: {data.windDeg}</h2>
+          <h1 className="icon">Icon: {data.icon}</h1>
+          <h2 className="pressure">Pressure: {data.pressure}</h2>
+          <h2 className="humidity">Humidity: {data.humidity}</h2>
+          <h2 className="desc">Desc: {data.desc}</h2>
+          <h2 className="clouds">clouds: {data.clouds}</h2>
+          {sign !== "F" && <h2 className="wind">Wind: {wind} Km/h</h2>}
+          {sign === "F" && <h2 className="wind">Wind: {wind} mph</h2>}
+          <h2 className="wind-dr">Wind Direction: {data.windDeg}</h2>
         </div>
       )}
 

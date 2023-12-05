@@ -108,23 +108,36 @@ const WeatherBox = (props) => {
   useEffect(() => {
     if (data.temp) {
       changeIconInfo(sign);
-      setData(data);
     }
   }, [data, changeIconInfo, sign]);
 
   // Components html
   return (
     <div className="weather-box">
-      <div className="padder"></div>
+      {/* <div className="padder"></div> */}
 
       {/* Display information */}
       {temp !== "Temp" && (
-        <h1>
-          Temp: {temp}°{sign}
-        </h1>
+        <div className="display-info">
+          <h1>
+            {temp}°{sign}
+          </h1>
+          <h1>
+            {tempMax}°/{tempMin}°
+          </h1>
+          <h1>
+            Feels Like: {feelsLike}°{sign}
+          </h1>
+          <h1>Icon: {data.icon}</h1>
+          <h2>Pressure: {data.pressure}</h2>
+          <h2>Humidity: {data.humidity}</h2>
+          <h2>Desc: {data.desc}</h2>
+          <h2>clouds: {data.clouds}</h2>
+          {sign !== "F" && <h2>Wind: {wind} Km/h</h2>}
+          {sign === "F" && <h2>Wind: {wind} mph</h2>}
+          <h2>Wind Direction: {data.windDeg}</h2>
+        </div>
       )}
-      {temp !== "Temp" && sign !== "F" && <h2>Wind: {wind} Km/h</h2>}
-      {temp !== "Temp" && sign === "F" && <h2>Wind: {wind} mph</h2>}
 
       {/* Gets search location */}
       <form>

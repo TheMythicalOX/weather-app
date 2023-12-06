@@ -1,9 +1,16 @@
 /* weather box */
 .weather-box {
-  background-color: rgba(60, 99, 134, 0.534);
-  width: auto;
-  height: 50vh;
+  background: rgb(148, 187, 233);
+  background: radial-gradient(
+    circle,
+    rgba(148, 187, 233, 1) 0%,
+    rgba(238, 204, 174, 1) 100%
+  );
+  width: 40vw;
+  height: 80vh;
   text-align: center;
+  border-radius: 35px;
+  margin: 0.5vw;
 }
 .weather-box h1,
 .weather-box h2,
@@ -14,12 +21,17 @@
   margin: 20px auto;
 }
 .padder {
-  height: 100px;
-  width: auto;
+  background-color: #111;
+  height: 30vh;
+  width: 10vw;
+  padding: 0;
+  margin: auto;
 }
 
 /* compare button */
 .compare {
+  display: block;
+  margin: auto;
   margin-bottom: 10px;
   background: rgb(17, 17, 17);
   background: linear-gradient(
@@ -32,7 +44,6 @@
   border: 1px solid #111;
   border-radius: 40px;
   padding: 10px;
-  box-shadow: 0px 1px 1px var(--Var3);
 }
 .compare:hover {
   box-shadow: 0px 3px 2px var(--Var3);

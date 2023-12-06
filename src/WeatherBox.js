@@ -113,85 +113,87 @@ const WeatherBox = (props) => {
 
   // Components html
   return (
-    <div className="weather-box">
-      {/* <div className="padder"></div> */}
+    <div className="vert-align">
+      <div className="weather-box">
+        {temp === "Temp" && <div className="padder"></div>}
 
-      {/* Display information */}
-      {temp !== "Temp" && (
-        <div className="display-info">
-          <h1 className="temp">
-            {temp}°{sign}
-          </h1>
-          <h1 className="high-low">
-            {tempMax}°/{tempMin}°
-          </h1>
-          <h1 className="feels-like">
-            Feels Like: {feelsLike}°{sign}
-          </h1>
-          <h1 className="icon">Icon: {data.icon}</h1>
-          <h2 className="pressure">Pressure: {data.pressure}</h2>
-          <h2 className="humidity">Humidity: {data.humidity}</h2>
-          <h2 className="desc">Desc: {data.desc}</h2>
-          <h2 className="clouds">clouds: {data.clouds}</h2>
-          {sign !== "F" && <h2 className="wind">Wind: {wind} Km/h</h2>}
-          {sign === "F" && <h2 className="wind">Wind: {wind} mph</h2>}
-          <h2 className="wind-dr">Wind Direction: {data.windDeg}</h2>
-        </div>
-      )}
-
-      {/* Gets search location */}
-      <form>
-        <button onClick={handleSubmit}>Search...</button>
-        <input
-          type="text"
-          placeholder="Enter Location..."
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setSearchLength(e.target.value.length);
-          }}
-        />
-        {/* drop down menu for search */}
-        {searchLength > 2 && search && (
-          <div className="dropdown">
-            {locationData
-              .filter((item) => {
-                const searchTerm = search.toLowerCase();
-                const searchInput = item.name.toLowerCase();
-
-                return (
-                  searchTerm &&
-                  searchInput.startsWith(searchTerm) &&
-                  searchTerm !== searchInput
-                );
-              })
-              .slice(0, dropDownLimit)
-              .map((item) => (
-                <div
-                  className="dropdown-row"
-                  onClick={() => {
-                    setSearch(item.name);
-                    setSearchLength(item.name.length);
-                  }}
-                  key={item.name}
-                >
-                  {item.name}
-                </div>
-              ))}
+        {/* Display information */}
+        {temp !== "Temp" && (
+          <div className="display-info">
+            <h1 className="temp">
+              {temp}°{sign}
+            </h1>
+            <h1 className="high-low">
+              {tempMax}°/{tempMin}°
+            </h1>
+            <h1 className="feels-like">
+              Feels Like: {feelsLike}°{sign}
+            </h1>
+            <h1 className="icon">Icon: {data.icon}</h1>
+            <h2 className="pressure">Pressure: {data.pressure}</h2>
+            <h2 className="humidity">Humidity: {data.humidity}</h2>
+            <h2 className="desc">Desc: {data.desc}</h2>
+            <h2 className="clouds">clouds: {data.clouds}</h2>
+            {sign !== "F" && <h2 className="wind">Wind: {wind} Km/h</h2>}
+            {sign === "F" && <h2 className="wind">Wind: {wind} mph</h2>}
+            <h2 className="wind-dr">Wind Direction: {data.windDeg}</h2>
           </div>
         )}
-      </form>
-      {error && <h1>{error}</h1>}
-      {isPending && <p>Loading...</p>}
 
-      {/* Units selector, only visible when temp is set */}
-      {temp !== "Temp" && (
-        <select onChange={handleUnits}>
-          <option value="F">imperial</option>
-          <option value="C">metric</option>
-          <option value="K">kelvin</option>
-        </select>
-      )}
+        {/* Gets search location */}
+        <form>
+          <button onClick={handleSubmit}>Search...</button>
+          <input
+            type="text"
+            placeholder="Enter Location..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setSearchLength(e.target.value.length);
+            }}
+          />
+          {/* drop down menu for search */}
+          {searchLength > 2 && search && (
+            <div className="dropdown">
+              {locationData
+                .filter((item) => {
+                  const searchTerm = search.toLowerCase();
+                  const searchInput = item.name.toLowerCase();
+
+                  return (
+                    searchTerm &&
+                    searchInput.startsWith(searchTerm) &&
+                    searchTerm !== searchInput
+                  );
+                })
+                .slice(0, dropDownLimit)
+                .map((item) => (
+                  <div
+                    className="dropdown-row"
+                    onClick={() => {
+                      setSearch(item.name);
+                      setSearchLength(item.name.length);
+                    }}
+                    key={item.name}
+                  >
+                    {item.name}
+                  </div>
+                ))}
+            </div>
+          )}
+        </form>
+        {error && <h1>{error}</h1>}
+        {isPending && <p>Loading...</p>}
+
+        {/* Units selector, only visible when temp is set */}
+        {temp !== "Temp" && (
+          <select onChange={handleUnits}>
+            <option value="F">imperial</option>
+            <option value="C">metric</option>
+            <option value="K">kelvin</option>
+          </select>
+        )}
+      </div>
     </div>
   );
 };

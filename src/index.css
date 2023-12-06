@@ -1,7 +1,7 @@
 :root {
-  --Var1: rgb(0, 110, 255);
-  --Var2: rgb(255, 153, 0);
-  --Var3: rgb(200, 200, 200);
+  --Var1: rgb(0, 53, 122);
+  --Var2: rgb(107, 65, 1);
+  --Var3: rgb(128, 0, 0);
 }
 
 body {
@@ -19,13 +19,20 @@ code {
 }
 
 html {
-  background-color: #222;
+  background: rgb(110, 138, 172);
+  background: radial-gradient(
+    circle,
+    rgba(110, 138, 172, 1) 0%,
+    rgba(173, 149, 127, 1) 100%
+  );
 }
 
 .content {
-  max-width: 600px;
+  max-width: 90vw;
   margin: 40px auto;
   padding: 20px;
-  align-items: center;
   text-align: center;
+}
+.vert-align {
+  display: inline-flex;
 }

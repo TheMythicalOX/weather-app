@@ -10,3 +10,30 @@
 .dropdown:hover {
   visibility: visible;
 }
+.dropdown-row {
+  color: rgb(189, 189, 189);
+  background: rgb(17, 17, 17);
+  background: linear-gradient(
+    0deg,
+    rgba(17, 17, 17, 1) 38%,
+    rgba(34, 34, 34, 1) 80%
+  );
+  width: 30vw;
+  margin: auto;
+  padding: 0.25vh 0.25vw;
+  box-shadow: 0px 2px 10px var(--Var2);
+}
+.weather-box:nth-child(2) .dropdown-row {
+  box-shadow: 0px 2px 10px var(--Var1);
+}
+.dropdown-row:hover {
+  color: rgb(255, 255, 255);
+  border: 1px solid white;
+  box-shadow: 0px 2px 10px white;
+  background: rgb(34, 34, 34);
+  background: linear-gradient(
+    0deg,
+    rgba(34, 34, 34, 1) 52%,
+    rgba(17, 17, 17, 1) 90%
+  );
+}

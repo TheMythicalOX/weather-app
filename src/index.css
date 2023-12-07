@@ -26,13 +26,28 @@ html {
     rgba(173, 149, 127, 1) 100%
   );
 }
-
-.content {
-  max-width: 90vw;
-  margin: 40px auto;
-  padding: 20px;
-  /* text-align: center; */
-  display: grid;
+@media screen and (orientation: portrait) {
+  .content {
+    max-width: 90vw;
+    margin: 40px auto;
+    padding: 20px;
+    display: block;
+  }
+  .weather-box:nth-child(1) {
+    margin-bottom: 20px;
+    width: 80vw;
+  }
+}
+@media screen and (orientation: landscape) {
+  .content {
+    max-width: 90vw;
+    margin: 40px auto;
+    padding: 20px;
+    display: grid;
+  }
+  .weather-box:nth-child(1) {
+    margin-bottom: 0;
+  }
 }
 .vert-align:nth-child(1) {
   grid-column: 1;

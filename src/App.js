@@ -11,12 +11,11 @@ function App() {
 
   return (
     <div className="App">
+      {/* On/off button for compare */}
+      <button className="compare" onClick={handleCompare}>
+        Compare...
+      </button>
       <div className="content">
-        {/* On/off button for compare */}
-        <button className="compare" onClick={handleCompare}>
-          Compare...
-        </button>
-
         {/* Display 1 weatherBox unless compare is true then display 2 */}
         <WeatherBox />
         {isComp && <WeatherBox />}

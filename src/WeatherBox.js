@@ -116,7 +116,6 @@ const WeatherBox = (props) => {
     <div className="vert-align">
       <div className="weather-box">
         {temp === "Temp" && <div className="padder"></div>}
-
         {/* Display information */}
         {temp !== "Temp" && (
           <div className="display-info">

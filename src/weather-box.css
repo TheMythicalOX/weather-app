@@ -10,7 +10,7 @@
   height: 80vh;
   text-align: center;
   border-radius: 35px;
-  margin: 0.5vw;
+  margin: auto;
 }
 .weather-box h1,
 .weather-box h2,
@@ -20,18 +20,15 @@
   display: block;
   margin: 20px auto;
 }
-.padder {
-  background-color: #111;
+.padder:nth-child(1) {
+  width: 20px;
   height: 30vh;
-  width: 10vw;
-  padding: 0;
-  margin: auto;
 }
 
 /* compare button */
 .compare {
   display: block;
-  margin: auto;
+  margin: 1vh auto;
   margin-bottom: 10px;
   background: rgb(17, 17, 17);
   background: linear-gradient(

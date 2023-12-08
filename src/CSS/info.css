@@ -13,3 +13,6 @@
 .disabled {
   color: rgb(134, 147, 163);
 }
+.icon {
+  filter: hue-rotate(210deg);
+}

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import ChangeUnits from "./ChangeUnits";
 import Dropdown from "./Dropdown";
 import DisplayInfo from "./DisplayInfo";
 
@@ -125,6 +124,7 @@ const WeatherBox = (props) => {
             tempMin={tempMin}
             tempMax={tempMax}
             feelsLike={feelsLike}
+            handleUnits={handleUnits}
           />
         )}
 
@@ -159,11 +159,6 @@ const WeatherBox = (props) => {
         </form>
         {error && <h1>{error}</h1>}
         {isPending && <p>Loading...</p>}
-
-        {/* Units selector, only visible when temp is set */}
-        {temp !== "Temp" && (
-          <ChangeUnits sign={sign} handleUnits={handleUnits} />
-        )}
       </div>
     </div>
   );

@@ -200,8 +200,8 @@ const WeatherBox = (props) => {
                 }}
                 className="sign-button-box"
               >
-                <h1 className="sign-button">°F|</h1>
-                <h1 className="disabled sign-button">°C</h1>
+                <h1 className="disabled sign-button">°F</h1>
+                <h1 className="sign-button">|°C</h1>
               </div>
             )}
             {sign === "C" && (
@@ -211,8 +211,8 @@ const WeatherBox = (props) => {
                 }}
                 className="sign-button-box"
               >
-                <h1 className="disabled sign-button">°F</h1>
-                <h1 className="sign-button">|°C</h1>
+                <h1 className="sign-button">°F|</h1>
+                <h1 className="disabled sign-button">°C</h1>
               </div>
             )}
           </div>

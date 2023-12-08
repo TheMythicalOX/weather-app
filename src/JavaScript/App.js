@@ -17,8 +17,8 @@ function App() {
       </button>
       <div className="content">
         {/* Display 1 weatherBox unless compare is true then display 2 */}
-        <WeatherBox />
-        {isComp && <WeatherBox />}
+        <WeatherBox className="box1" />
+        {isComp && <WeatherBox className="box2" />}
       </div>
     </div>
   );

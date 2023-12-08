@@ -112,7 +112,7 @@ const WeatherBox = (props) => {
   // Components html
   return (
     <div className="vert-align">
-      <div className="weather-box">
+      <div className={`weather-box ${props.className}`}>
         {temp === "Temp" && <div className="padder"></div>}
         {/* Display information */}
         {temp !== "Temp" && (
@@ -139,6 +139,7 @@ const WeatherBox = (props) => {
             Search...
           </button>
           <input
+            className="input"
             type="text"
             placeholder="Enter Location..."
             value={search}

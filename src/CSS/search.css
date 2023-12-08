@@ -1,5 +1,5 @@
 /* Search box input */
-.weather-box input {
+input {
   box-shadow: 0px 1px 1px rgb(200, 200, 200);
   color: #ccc;
   background: rgb(17, 17, 17);
@@ -14,21 +14,23 @@
   text-align: center;
   border: none;
 }
-.weather-box input:focus {
+.box1 input:focus {
   outline-color: var(--Var1);
   outline-width: 2px;
   outline-style: solid;
   box-shadow: 0px 3px 2px var(--Var1);
 }
-.weather-box input:hover {
+.box1 input:hover {
   outline-color: var(--Var1);
   box-shadow: 0px 3px 2px var(--Var1);
 }
-.weather-box:nth-child(2) input:focus {
+.box2 input:focus {
   outline-color: var(--Var2);
+  outline-width: 2px;
+  outline-style: solid;
   box-shadow: 0px 3px 2px var(--Var2);
 }
-.weather-box:nth-child(2) input:hover {
+.box2 input:hover {
   outline-color: var(--Var2);
   box-shadow: 0px 3px 2px var(--Var2);
 }
@@ -48,13 +50,13 @@
   box-shadow: 0px 1px 1px rgb(200, 200, 200);
   padding: 10px;
 }
-.weather-box button:hover {
+.box1 button:hover {
   box-shadow: 0px 3px 2px var(--Var1);
 }
-.weather-box:nth-child(2) button:hover {
+.box2 button:hover {
   box-shadow: 0px 3px 2px var(--Var2);
 }
-.weather-box button:active {
+.box1 button:active {
   background: rgb(34, 34, 34);
   background: linear-gradient(
     0deg,
@@ -67,7 +69,14 @@
   outline-width: 2px;
   outline-style: solid;
 }
-.weather-box:nth-child(2) button:active {
+.box2 button:active {
+  background: rgb(34, 34, 34);
+  background: linear-gradient(
+    0deg,
+    rgba(34, 34, 34, 1) 52%,
+    rgba(17, 17, 17, 1) 90%
+  );
+  color: #aaa;
   box-shadow: 0px 3px 2px var(--Var2);
   outline-color: var(--Var2);
   outline-width: 2px;

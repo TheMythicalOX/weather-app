@@ -1,4 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
+import ChangeUnits from "./ChangeUnits";
+import Dropdown from "./Dropdown";
+import DisplayInfo from "./DisplayInfo";
 
 const WeatherBox = (props) => {
   // Set useStates / variables
@@ -13,8 +16,6 @@ const WeatherBox = (props) => {
   const [search, setSearch] = useState("");
   const [sign, setSign] = useState("F");
   const [data, setData] = useState({});
-  const dropDownLimit = 5;
-  const locationData = require("./data/Us.json");
 
   // Set api key and base link
   const api = {
@@ -116,25 +117,15 @@ const WeatherBox = (props) => {
         {temp === "Temp" && <div className="padder"></div>}
         {/* Display information */}
         {temp !== "Temp" && (
-          <div className="display-info">
-            <h1 className="temp">
-              {temp}°{sign}
-            </h1>
-            <h1 className="high-low">
-              {tempMax}°/{tempMin}°
-            </h1>
-            <h1 className="feels-like">
-              Feels Like: {feelsLike}°{sign}
-            </h1>
-            <h1 className="icon">Icon: {data.icon}</h1>
-            <h2 className="pressure">Pressure: {data.pressure}</h2>
-            <h2 className="humidity">Humidity: {data.humidity}</h2>
-            <h2 className="desc">Desc: {data.desc}</h2>
-            <h2 className="clouds">clouds: {data.clouds}</h2>
-            {sign !== "F" && <h2 className="wind">Wind: {wind} Km/h</h2>}
-            {sign === "F" && <h2 className="wind">Wind: {wind} mph</h2>}
-            <h2 className="wind-dr">Wind Direction: {data.windDeg}</h2>
-          </div>
+          <DisplayInfo
+            data={data}
+            sign={sign}
+            temp={temp}
+            wind={wind}
+            tempMin={tempMin}
+            tempMax={tempMax}
+            feelsLike={feelsLike}
+          />
         )}
 
         {/* Gets search location */}
@@ -158,33 +149,12 @@ const WeatherBox = (props) => {
           />
           {/* drop down menu for search */}
           {searchLength > 2 && search && (
-            <div className="dropdown">
-              {locationData
-                .filter((item) => {
-                  const searchTerm = search.toLowerCase();
-                  const searchInput = item.name.toLowerCase();
-
-                  return (
-                    searchTerm &&
-                    searchInput.startsWith(searchTerm) &&
-                    searchTerm !== searchInput
-                  );
-                })
-                .slice(0, dropDownLimit)
-                .map((item) => (
-                  <div
-                    className="dropdown-row"
-                    onClick={() => {
-                      setSearch(item.name);
-                      setSearchLength(item.name.length);
-                      handleSubmit(item.name);
-                    }}
-                    key={item.name}
-                  >
-                    {item.name}
-                  </div>
-                ))}
-            </div>
+            <Dropdown
+              handleSubmit={handleSubmit}
+              setSearchLength={setSearchLength}
+              setSearch={setSearch}
+              search={search}
+            />
           )}
         </form>
         {error && <h1>{error}</h1>}
@@ -192,30 +162,7 @@ const WeatherBox = (props) => {
 
         {/* Units selector, only visible when temp is set */}
         {temp !== "Temp" && (
-          <div className="change-units">
-            {sign === "F" && (
-              <div
-                onClick={() => {
-                  handleUnits("C");
-                }}
-                className="sign-button-box"
-              >
-                <h1 className="disabled sign-button">°F</h1>
-                <h1 className="sign-button">|°C</h1>
-              </div>
-            )}
-            {sign === "C" && (
-              <div
-                onClick={() => {
-                  handleUnits("F");
-                }}
-                className="sign-button-box"
-              >
-                <h1 className="sign-button">°F|</h1>
-                <h1 className="disabled sign-button">°C</h1>
-              </div>
-            )}
-          </div>
+          <ChangeUnits sign={sign} handleUnits={handleUnits} />
         )}
       </div>
     </div>

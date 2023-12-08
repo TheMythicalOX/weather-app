@@ -40,31 +40,30 @@ const WeatherBox = (props) => {
         setTempMax(Math.round(((data.tempMax - 32) * 5) / 9));
         setFeelsLike(Math.round(((data.feelsLike - 32) * 5) / 9));
       }
-      if (i === "K") {
-        setTemp(Math.round(((data.temp - 32) * 5) / 9 + 273.15));
-        setWind(Math.round(data.wind * 1.609));
-        setTempMin(Math.round(((data.tempMin - 32) * 5) / 9 + 273.15));
-        setTempMax(Math.round(((data.tempMax - 32) * 5) / 9 + 273.15));
-        setFeelsLike(Math.round(((data.feelsLike - 32) * 5) / 9 + 273.15));
-      }
     },
     [data.temp, data.wind, data.tempMin, data.tempMax, data.feelsLike]
   );
 
   // get and change units used for displaying information
-  const handleUnits = (e) => {
-    changeIconInfo(e.target.value);
+  const handleUnits = (i) => {
+    changeIconInfo(i);
   };
 
   // Get weather data and save the data, or throw error if invalid
-  const getWeatherData = () => {
+  const getWeatherData = (dropName) => {
+    let tmpSearch = "";
+    if (dropName !== null) tmpSearch = dropName;
+    else tmpSearch = dropName;
     setIsPending(true);
     const abortCont = new AbortController();
 
     setTimeout(() => {
-      fetch(`${api.base}weather?q=${search}&units=imperial&APPID=${api.key}`, {
-        signal: abortCont.signal,
-      })
+      fetch(
+        `${api.base}weather?q=${tmpSearch}&units=imperial&APPID=${api.key}`,
+        {
+          signal: abortCont.signal,
+        }
+      )
         .then((res) => {
           if (!res.ok) {
             throw Error("Please Enter Valid Location");
@@ -99,9 +98,8 @@ const WeatherBox = (props) => {
   };
 
   // Prevent button default and get the weather data
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    getWeatherData();
+  const handleSubmit = (dropName) => {
+    getWeatherData(dropName);
   };
 
   // page refresh
@@ -141,7 +139,14 @@ const WeatherBox = (props) => {
 
         {/* Gets search location */}
         <form>
-          <button onClick={handleSubmit}>Search...</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleSubmit(search);
+            }}
+          >
+            Search...
+          </button>
           <input
             type="text"
             placeholder="Enter Location..."
@@ -172,6 +177,7 @@ const WeatherBox = (props) => {
                     onClick={() => {
                       setSearch(item.name);
                       setSearchLength(item.name.length);
+                      handleSubmit(item.name);
                     }}
                     key={item.name}
                   >
@@ -186,11 +192,30 @@ const WeatherBox = (props) => {
 
         {/* Units selector, only visible when temp is set */}
         {temp !== "Temp" && (
-          <select onChange={handleUnits}>
-            <option value="F">imperial</option>
-            <option value="C">metric</option>
-            <option value="K">kelvin</option>
-          </select>
+          <div className="change-units">
+            {sign === "F" && (
+              <div
+                onClick={() => {
+                  handleUnits("C");
+                }}
+                className="sign-button-box"
+              >
+                <h1 className="sign-button">°F|</h1>
+                <h1 className="disabled sign-button">°C</h1>
+              </div>
+            )}
+            {sign === "C" && (
+              <div
+                onClick={() => {
+                  handleUnits("F");
+                }}
+                className="sign-button-box"
+              >
+                <h1 className="disabled sign-button">°F</h1>
+                <h1 className="sign-button">|°C</h1>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>

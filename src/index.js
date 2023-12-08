@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import "./info.css";
-import "./weather-box.css";
-import "./search.css";
-import "./dropdown.css";
-import App from "./App";
+import "./CSS/index.css";
+import "./CSS/info.css";
+import "./CSS/weather-box.css";
+import "./CSS/search.css";
+import "./CSS/dropdown.css";
+import App from "./JavaScript/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,6 +1,6 @@
 const Dropdown = (props) => {
   const dropDownLimit = 5;
-  const locationData = require("./data/Us.json");
+  const locationData = require("../data/Us.json");
   const search = props.search;
   const setSearch = props.setSearch;
   const setSearchLength = props.setSearchLength;

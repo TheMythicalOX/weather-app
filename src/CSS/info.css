@@ -16,3 +16,9 @@
 .icon {
   filter: hue-rotate(210deg);
 }
+.display-info img {
+  width: 2vw;
+}
+.display-info .icon {
+  width: auto;
+}

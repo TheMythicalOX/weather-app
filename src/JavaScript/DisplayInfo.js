@@ -19,19 +19,37 @@ const DisplayInfo = (props) => {
       <h1 className="temp">
         {temp}°{sign}
       </h1>
-      <h1 className="feels-like">
-        Feels Like: {feelsLike}°{sign}
-      </h1>
       <h1 className="high-low">
         {tempMax}°/{tempMin}°
       </h1>
-      <h2 className="pressure">Pressure: {data.pressure}</h2>
-      <h2 className="humidity">Humidity: {data.humidity}</h2>
-      <h2 className="desc">Desc: {data.desc}</h2>
-      <h2 className="clouds">clouds: {data.clouds}</h2>
-      {sign !== "F" && <h2 className="wind">Wind: {wind} Km/h</h2>}
-      {sign === "F" && <h2 className="wind">Wind: {wind} mph</h2>}
-      <h2 className="wind-dr">Wind Direction: {data.windDeg}</h2>
+      <h1 className="feels-like">
+        Feels Like: {feelsLike}°{sign}
+      </h1>
+      <h2 className="pressure">
+        <img src={require("../images/gauge.png")} alt="pressure" />
+        {data.pressure}
+      </h2>
+      <h2 className="humidity">
+        <img src={require("../images/humidity.png")} alt="humidity" />
+        {data.humidity}
+      </h2>
+      <h2 className="clouds">
+        <img src={require("../images/cloud.png")} alt="clouds" /> {data.clouds}
+      </h2>
+      {sign !== "F" && (
+        <h2 className="wind">
+          <img src={require("../images/wind.png")} alt="wind" /> {wind} Km/h
+        </h2>
+      )}
+      {sign === "F" && (
+        <h2 className="wind">
+          <img src={require("../images/wind.png")} alt="wind" /> {wind} mph
+        </h2>
+      )}
+      <h2 className="wind-dr">
+        <img src={require("../images/storm.png")} alt="wind direction" />{" "}
+        {data.windDeg}
+      </h2>
       {temp !== "Temp" && <ChangeUnits sign={sign} handleUnits={handleUnits} />}
     </div>
   );

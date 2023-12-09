@@ -49,6 +49,18 @@ const WeatherBox = (props) => {
     changeIconInfo(i);
   };
 
+  const handleWindDr = (dr) => {
+    dr = Math.round(dr);
+    if ((dr >= 0 && dr < 25) || (dr >= 335 && dr <= 360)) return "North";
+    if (dr >= 26 && dr < 70) return "North East";
+    if (dr >= 70 && dr < 110) return "East";
+    if (dr >= 110 && dr < 160) return "South East";
+    if (dr >= 160 && dr < 200) return "South";
+    if (dr >= 200 && dr < 250) return "South West";
+    if (dr >= 250 && dr < 290) return "West";
+    if (dr >= 290 && dr < 335) return "North West";
+  };
+
   // Get weather data and save the data, or throw error if invalid
   const getWeatherData = (dropName) => {
     let tmpSearch = "";
@@ -71,10 +83,11 @@ const WeatherBox = (props) => {
           return res.json();
         })
         .then((result) => {
+          let dr = handleWindDr(result.wind.deg);
           setData({
             clouds: result.clouds.all,
             wind: result.wind.speed,
-            windDeg: result.wind.deg,
+            windDeg: dr,
             temp: result.main.temp,
             tempMin: result.main.temp_min,
             tempMax: result.main.temp_max,
@@ -82,7 +95,6 @@ const WeatherBox = (props) => {
             humidity: result.main.humidity,
             feelsLike: result.main.feels_like,
             icon: result.weather[0].icon,
-            desc: result.weather[0].main,
           });
           setIsPending(false);
           setError(null);

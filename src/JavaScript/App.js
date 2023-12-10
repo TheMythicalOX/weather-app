@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       {/* On/off button for compare */}
       <button className="compare" onClick={handleCompare}>
-        Compare...
+        Compare
       </button>
       <div className="content">
         {/* Display 1 weatherBox unless compare is true then display 2 */}

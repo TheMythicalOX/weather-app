@@ -91,7 +91,6 @@ const WeatherBox = (props) => {
             temp: result.main.temp,
             tempMin: result.main.temp_min,
             tempMax: result.main.temp_max,
-            pressure: result.main.pressure,
             humidity: result.main.humidity,
             feelsLike: result.main.feels_like,
             icon: result.weather[0].icon,
@@ -140,6 +139,8 @@ const WeatherBox = (props) => {
           />
         )}
 
+        {error && <h1>{error}</h1>}
+        {isPending && <p>Loading...</p>}
         {/* Gets search location */}
         <form>
           <button
@@ -161,17 +162,14 @@ const WeatherBox = (props) => {
             }}
           />
           {/* drop down menu for search */}
-          {searchLength > 2 && search && (
-            <Dropdown
-              handleSubmit={handleSubmit}
-              setSearchLength={setSearchLength}
-              setSearch={setSearch}
-              search={search}
-            />
-          )}
+          <Dropdown
+            handleSubmit={handleSubmit}
+            setSearchLength={setSearchLength}
+            searchLength={searchLength}
+            setSearch={setSearch}
+            search={search}
+          />
         </form>
-        {error && <h1>{error}</h1>}
-        {isPending && <p>Loading...</p>}
       </div>
     </div>
   );

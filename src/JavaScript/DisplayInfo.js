@@ -25,16 +25,12 @@ const DisplayInfo = (props) => {
       <h1 className="feels-like">
         Feels Like: {feelsLike}°{sign}
       </h1>
-      <h2 className="pressure">
-        <img src={require("../images/gauge.png")} alt="pressure" />
-        {data.pressure}
+      <h2 className="clouds">
+        <img src={require("../images/cloud.png")} alt="clouds" /> {data.clouds}%
       </h2>
       <h2 className="humidity">
         <img src={require("../images/humidity.png")} alt="humidity" />
-        {data.humidity}
-      </h2>
-      <h2 className="clouds">
-        <img src={require("../images/cloud.png")} alt="clouds" /> {data.clouds}
+        {data.humidity}%
       </h2>
       {sign !== "F" && (
         <h2 className="wind">

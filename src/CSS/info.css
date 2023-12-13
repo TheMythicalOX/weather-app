@@ -20,12 +20,15 @@
     width: 5vw;
     margin-right: 1vw;
   }
-  .display-info {
+  .display-info,
+  .info {
     font-size: 2vw;
+  }
+  .search {
+    padding-top: 8.5vw;
   }
   .display-info .icon {
     width: 10vw;
-    padding-top: 8.5vw;
   }
 }
 @media screen and (orientation: landscape) {
@@ -37,6 +40,9 @@
     width: 1.25vw;
     margin-right: 0.25vw;
   }
+  .search {
+    padding-top: 5vh;
+  }
   .display-info {
     display: grid;
     grid-template-columns: 1fr 0.5fr 1fr;
@@ -46,6 +52,9 @@
     height: 60%;
     margin: auto;
     padding: 2vh;
+  }
+  .info {
+    font-size: 1vw;
   }
   .display-info .icon {
     width: 5vw;

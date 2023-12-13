@@ -29,6 +29,7 @@
 .compare {
   display: block;
   margin: 5vh auto;
+  margin-top: 2vh;
   margin-bottom: 10px;
   background: rgb(17, 17, 17);
   background: linear-gradient(

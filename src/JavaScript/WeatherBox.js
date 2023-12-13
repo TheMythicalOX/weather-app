@@ -15,6 +15,7 @@ const WeatherBox = (props) => {
   const [search, setSearch] = useState("");
   const [sign, setSign] = useState("F");
   const [data, setData] = useState({});
+  const [name, setName] = useState("");
 
   // Set api key and base link
   const api = {
@@ -84,6 +85,7 @@ const WeatherBox = (props) => {
         })
         .then((result) => {
           let dr = handleWindDr(result.wind.deg);
+          setName(tmpSearch);
           setData({
             clouds: result.clouds.all,
             wind: result.wind.speed,
@@ -136,6 +138,7 @@ const WeatherBox = (props) => {
             tempMax={tempMax}
             feelsLike={feelsLike}
             handleUnits={handleUnits}
+            name={name}
           />
         )}
 

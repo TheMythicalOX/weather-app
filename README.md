@@ -1,10 +1,16 @@
-# Getting Started with Create React App
+# Weather To Go
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project uses [https://openweathermap.org](https://openweathermap.org) api for weather imformation.
 
-## Available Scripts
+## Instaling locally
 
-In the project directory, you can run:
+### `git clone https://github.com/TheMythicalOX/weather-app.git`
+
+Clones github repository
+
+### `npm install`
+
+Installs all dependencies
 
 ### `npm start`
 
@@ -14,57 +20,32 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+Make a new file called ".env" and inside put "REACT_APP_API_KEY=" then put your own openweathermap api key (they have a free option)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+e.g. REACT_APP_API_KEY=00000000000000000000000000000000
 
-### `npm run build`
+## Break Down
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### idex.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Imports css files, and creates DOM element that renders App.js.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### App.js
 
-### `npm run eject`
+Renders HTML of the page name, a compare button, and either 1 or 2 WeatherBox components depending on if the compare button has been clicked.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### WeatherBox.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Renders a text input and search button. When 3 characters have been typed in the text input, a dropdown menue is rendered. When an item in the dropdown menue is clicked, or the search button is clicked, or enter is pressed while in focus, a function is called to fetch the data from openweathermap and set the data. Then Displayinfo is rendered with the data passed via props.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Dropdown.js
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Renders all locations, within the data set, that start with the users input, and is limited to 5.
 
-## Learn More
+### DisplayInfo.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Renders all information passed to it when the data has been set,
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### ChangeUsits.js
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+When the sign button has been clicked, it changes the data to the opposite unit system by calling a function, and flips the button to appear as the correct system.

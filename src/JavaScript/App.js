@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="weather-to-go">Weather to Go</h1>
+      <h1 className="weather-to-go">Weather To Go</h1>
       {/* On/off button for compare */}
       <button className="compare" onClick={handleCompare}>
         Compare

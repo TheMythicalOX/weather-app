@@ -12,6 +12,9 @@
 .icon {
   filter: hue-rotate(210deg);
 }
+.weather-box .search {
+  margin: 0;
+}
 @media screen and (orientation: portrait) {
   .weather-box .temp {
     margin: 0;

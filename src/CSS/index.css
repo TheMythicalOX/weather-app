@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap");
 :root {
   --Var1: rgb(89, 164, 255);
   --Var2: rgb(255, 199, 146);
@@ -56,6 +56,10 @@ html {
     font-size: 2vw;
     width: 45vw;
   }
+  .weather-to-go {
+    font-size: 5vw;
+    margin-top: 3vh;
+  }
 }
 @media screen and (orientation: landscape) {
   .content {
@@ -84,6 +88,11 @@ html {
     min-height: 0;
     height: 80vh;
   }
+  .weather-to-go {
+    font-size: 5vh;
+    margin-top: 1vw;
+    margin-bottom: 1vh;
+  }
 }
 .vert-align:nth-child(1) {
   grid-column: 1;
@@ -92,6 +101,6 @@ html {
   grid-column: 2;
 }
 .weather-to-go {
+  font-weight: bold;
   text-align: center;
-  margin-top: 2vh;
 }
